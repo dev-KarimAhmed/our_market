@@ -42,6 +42,7 @@ class ForgotView extends StatelessWidget {
                 children: [
                   const CustomTextFormField(
                     labelText: "Email",
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(
                     height: 20,
