@@ -6,6 +6,7 @@ import 'package:our_market/views/auth/ui/signup_view.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_row_with_arrow.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_btn.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_field.dart';
+import 'package:our_market/views/nav_bar/ui/main_home_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -84,7 +85,7 @@ class LoginView extends StatelessWidget {
                     ),
                     CustomRowWithArrowBtn(
                       text: "Login With Google",
-                      onTap: () {},
+                      onTap: () => navigateTo(context, const MainHomeView()),
                     ),
                     const SizedBox(
                       height: 20,
