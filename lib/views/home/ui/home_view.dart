@@ -33,15 +33,15 @@ class HomeView extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const Card(
-              shape: RoundedRectangleBorder(
+          Card(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               child: Column(
                 children: [
                   Stack(
                     children: [
-                      ClipRRect(
+                      const ClipRRect(
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(16),
                           bottomRight: Radius.circular(16),
@@ -50,6 +50,25 @@ class HomeView extends StatelessWidget {
                         child: Image(
                           image: NetworkImage(
                               "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900"),
+                        ),
+                      ),
+                      Positioned(
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 65,
+                          height: 35,
+                          decoration: const BoxDecoration(
+                              color: AppColors.kPrimaryColor,
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(16),
+                                bottomRight: Radius.circular(16),
+                              )),
+                          child: const Text(
+                            "10% OFF",
+                            style: TextStyle(
+                              color: AppColors.kWhiteColor,
+                            ),
+                          ),
                         ),
                       ),
                     ],
