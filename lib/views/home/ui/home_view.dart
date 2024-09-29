@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
 import 'package:our_market/core/components/custom_search_field.dart';
+import 'package:our_market/views/auth/ui/widgets/custom_elevated_btn.dart';
 import 'package:our_market/views/home/ui/widgets/categories_list.dart';
 
 class HomeView extends StatelessWidget {
@@ -72,6 +73,61 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Product Name",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.favorite,
+                                    color: AppColors.kGreyColor,
+                                  ))
+                            ]),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Column(
+                              children: [
+                                Text(
+                                  "100 LE",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "120 LE",
+                                  style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.kGreyColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            CustomEBtn(
+                              text: "Buy Now",
+                              onTap: () {},
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ],
               )),
