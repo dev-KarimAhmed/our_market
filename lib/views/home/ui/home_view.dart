@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
+import 'package:our_market/core/components/cache_image.dart';
 import 'package:our_market/core/components/custom_search_field.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_elevated_btn.dart';
 import 'package:our_market/views/home/ui/widgets/categories_list.dart';
@@ -48,9 +50,9 @@ class HomeView extends StatelessWidget {
                           bottomRight: Radius.circular(16),
                           bottomLeft: Radius.circular(16),
                         ),
-                        child: Image(
-                          image: NetworkImage(
-                              "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900"),
+                        child: CaheImage(
+                          url:
+                              "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900",
                         ),
                       ),
                       Positioned(
