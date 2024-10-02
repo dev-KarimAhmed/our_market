@@ -5,6 +5,6 @@ class StoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Store View"),);
+    return const Center(child: Text("Store View"),);
   }
 }

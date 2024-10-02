@@ -5,6 +5,6 @@ class FavoriteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Favorite View"),);
+    return const Center(child: Text("Favorite View"),);
   }
 }

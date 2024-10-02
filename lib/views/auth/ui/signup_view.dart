@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
-import 'package:our_market/core/functions/navigate_to.dart';
-import 'package:our_market/views/auth/ui/forgot_view.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_row_with_arrow.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_btn.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_field.dart';
