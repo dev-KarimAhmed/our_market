@@ -1,75 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
+import 'package:our_market/views/profile/ui/widgets/custom_row_btn.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
-      color: AppColors.kWhiteColor,
-      margin: EdgeInsets.all(24),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(16),
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 55,
-              backgroundColor: AppColors.kPrimaryColor,
-              foregroundColor: AppColors.kWhiteColor,
-              child: Icon(
-                Icons.person,
-                size: 45,
-              ),
+    return Center(
+      child: SizedBox(
+        height: MediaQuery.sizeOf(context).height * .65,
+        child: Card(
+          color: AppColors.kWhiteColor,
+          margin: const EdgeInsets.all(24),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "User Name",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text("User Email"),
-            SizedBox(
-              height: 10,
-            ),
-            Card(
-              color: AppColors.kPrimaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const CircleAvatar(
+                  radius: 55,
+                  backgroundColor: AppColors.kPrimaryColor,
+                  foregroundColor: AppColors.kWhiteColor,
+                  child: Icon(
+                    Icons.person,
+                    size: 45,
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.person,
-                      color: AppColors.kWhiteColor,
-                    ),
-                    Text(
-                      "Edit Name",
-                      style: TextStyle(color: AppColors.kWhiteColor),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.kWhiteColor,
-                    ),
-                  ],
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
+                const Text(
+                  "User Name",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text("User Email"),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomRowBtn(
+                  onTap: () {},
+                  icon: Icons.person,
+                  text: "Edit Profile",
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomRowBtn(
+                  onTap: () {},
+                  icon: Icons.shopping_basket,
+                  text: "My Orders",
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomRowBtn(
+                  onTap: () {},
+                  icon: Icons.logout,
+                  text: "Logout",
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
