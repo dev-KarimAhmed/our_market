@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
 import 'package:our_market/views/nav_bar/ui/main_home_view.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'views/auth/ui/login_view.dart';
 
-void main() {
+void main() async{
+    WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://itjstiahcigzhbrwggfz.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0anN0aWFoY2lnemhicndnZ2Z6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg0MzEwMzksImV4cCI6MjA0NDAwNzAzOX0.-17PEEPsiPhIIBeLqlTEbJjwfcBjSzq65XFK6gLiFWI',
+  );
   runApp(const OurMarket());
 }
 
