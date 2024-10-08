@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:our_market/core/components/custom_circle_pro_ind.dart';
@@ -13,6 +12,9 @@ class CaheImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
+      fit: BoxFit.cover,
+      height: 250,
+      width: double.infinity,
       imageUrl: url,
       placeholder: (context, url) => const SizedBox(
         height: 200,
