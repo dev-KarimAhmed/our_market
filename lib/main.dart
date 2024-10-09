@@ -3,7 +3,6 @@ import 'package:our_market/core/app_colors.dart';
 import 'package:our_market/views/nav_bar/ui/main_home_view.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'views/auth/ui/login_view.dart';
 
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
