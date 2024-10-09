@@ -25,12 +25,14 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isPasswordHidden = true;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
-         if (state is LoginSuccess) {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  MainHomeView()));
+        if (state is LoginSuccess) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => MainHomeView()));
         }
         if (state is LoginError) {
           showMsg(context, state.message);
@@ -84,10 +86,14 @@ class _LoginViewState extends State<LoginView> {
                                   controller: passwordController,
                                   keyboardType: TextInputType.visiblePassword,
                                   labelText: "Password",
-                                  isSecured: true,
+                                  isSecured: isPasswordHidden,
                                   suffIcon: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.visibility_off),
+                                    onPressed: () {
+                                      setState(() {
+                                        isPasswordHidden = !isPasswordHidden;
+                                      });
+                                    },
+                                    icon:  Icon(isPasswordHidden ? Icons.visibility : Icons.visibility_off),
                                   ),
                                 ),
                                 const SizedBox(
