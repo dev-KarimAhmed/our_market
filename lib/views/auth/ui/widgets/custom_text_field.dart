@@ -6,15 +6,18 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.labelText,
     this.suffIcon,
-    this.isSecured = false, this.keyboardType,
+    this.isSecured = false,
+    this.keyboardType,  this.controller,
   });
   final String labelText;
   final Widget? suffIcon;
   final bool isSecured;
   final TextInputType? keyboardType;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       obscureText: isSecured,
       validator: (value) {
         if (value == null || value.isEmpty) {
