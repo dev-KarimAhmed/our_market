@@ -23,6 +23,7 @@ class OurMarket extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+      SupabaseClient client = Supabase.instance.client;
     return BlocProvider(
       create: (context) => AuthenticationCubit(),
       child: MaterialApp(
@@ -32,7 +33,7 @@ class OurMarket extends StatelessWidget {
           scaffoldBackgroundColor: AppColors.kScaffoldColor,
           useMaterial3: true,
         ),
-        home: LoginView(),
+        home: client.auth.currentUser != null ? MainHomeView() : LoginView(),
       ),
     );
   }
