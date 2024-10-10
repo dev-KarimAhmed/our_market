@@ -26,8 +26,9 @@ class _SignupViewState extends State<SignupView> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
-        if (state is SignUpSuccess) {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  MainHomeView()));
+        if (state is SignUpSuccess || state is GoogleSignInSuccess) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => MainHomeView()));
         }
         if (state is SignUpError) {
           showMsg(context, state.message);
@@ -102,10 +103,11 @@ class _SignupViewState extends State<SignupView> {
                                           context
                                               .read<AuthenticationCubit>()
                                               .register(
-                                                  name: _nameController.text,
-                                                  email: _emailController.text,
-                                                  password:
-                                                      _passwordController.text,);
+                                                name: _nameController.text,
+                                                email: _emailController.text,
+                                                password:
+                                                    _passwordController.text,
+                                              );
                                         }
                                       },
                                     ),
@@ -114,7 +116,11 @@ class _SignupViewState extends State<SignupView> {
                                     ),
                                     CustomRowWithArrowBtn(
                                       text: "Sign Up With Google",
-                                      onTap: () {},
+                                      onTap: () {
+                                        context
+                                            .read<AuthenticationCubit>()
+                                            .googleSignIn();
+                                      },
                                     ),
                                     const SizedBox(
                                       height: 20,
@@ -153,6 +159,7 @@ class _SignupViewState extends State<SignupView> {
       },
     );
   }
+
   @override
   void dispose() {
     _nameController.dispose();
