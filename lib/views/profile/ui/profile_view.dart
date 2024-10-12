@@ -6,6 +6,7 @@ import 'package:our_market/core/functions/navigate_to.dart';
 import 'package:our_market/core/functions/navigate_without_back.dart';
 import 'package:our_market/views/auth/ui/login_view.dart';
 import 'package:our_market/views/product_details/logic/cubit/authentication_cubit.dart';
+import 'package:our_market/views/product_details/logic/models/user_model.dart';
 import 'package:our_market/views/profile/ui/edit_name_view.dart';
 import 'package:our_market/views/profile/ui/my_orders.dart';
 import 'package:our_market/views/profile/ui/widgets/custom_row_btn.dart';
@@ -18,12 +19,13 @@ class ProfileView extends StatelessWidget {
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is LogoutSuccess) {
-          navigateWithoutBack(context, LoginView());
+          navigateWithoutBack(context, const LoginView());
         }
       },
       builder: (context, state) {
+        UserDataModel? user = context.read<AuthenticationCubit>().userDataModel;
         return state is LogoutLoading
-            ? CustomCircleProgIndicator()
+            ? const CustomCircleProgIndicator()
             : Center(
                 child: SizedBox(
                   height: MediaQuery.sizeOf(context).height * .65,
@@ -51,14 +53,14 @@ class ProfileView extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text(
-                            "User Name",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                          Text(
+                            user?.name ?? "User Name",
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text("User Email"),
+                          Text(user?.email ?? "User Email"),
                           const SizedBox(
                             height: 10,
                           ),

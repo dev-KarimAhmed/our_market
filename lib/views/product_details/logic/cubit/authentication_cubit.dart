@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
+import 'package:our_market/views/product_details/logic/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'authentication_state.dart';
@@ -16,6 +17,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(LoginLoading());
     try {
       await client.auth.signInWithPassword(password: password, email: email);
+      await getUserData();
       emit(LoginSuccess());
     } on AuthException catch (e) {
       log(e.toString());
@@ -34,6 +36,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     try {
       await client.auth.signUp(password: password, email: email);
       await addUserData(name: name, email: email);
+      await getUserData();
       emit(SignUpSuccess());
     } on AuthException catch (e) {
       log(e.toString());
@@ -73,7 +76,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       accessToken: accessToken,
     );
     await addUserData(name: googleUser!.displayName!, email: googleUser!.email);
-
+      await getUserData();
+       
     emit(GoogleSignInSuccess());
     return response;
   }
@@ -100,8 +104,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
- // insert  => add only
- // upsert => add or update
+  // insert  => add only
+  // upsert => add or update
   Future<void> addUserData(
       {required String name, required String email}) async {
     emit(UserDataAddedLoading());
@@ -115,6 +119,25 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     } catch (e) {
       log(e.toString());
       emit(UserDataAddedError());
+    }
+  }
+
+  UserDataModel? userDataModel;
+  Future<void> getUserData() async {
+    emit(GetUserDataLoading());
+    try {
+      final data = await client
+          .from('users')
+          .select()
+          .eq("user_id", client.auth.currentUser!.id);
+      userDataModel = UserDataModel(
+          email: data[0]["email"],
+          name: data[0]["name"],
+          userId: data[0]["user_id"]);
+      emit(GetUserDataSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(GetUserDataError());
     }
   }
 }
