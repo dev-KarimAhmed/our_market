@@ -30,7 +30,7 @@ class _ForgotViewState extends State<ForgotView> {
       builder: (context, state) {
         return Scaffold(
           body: state is PasswordResetLoading
-              ? CustomCircleProgIndicator()
+              ? const CustomCircleProgIndicator()
               : SafeArea(
                   child: Form(
                   key: formKey,

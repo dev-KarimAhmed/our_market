@@ -3,7 +3,6 @@ import 'package:our_market/core/functions/build_appbar.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_elevated_btn.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_field.dart';
 
-import '../../../core/app_colors.dart';
 
 class EditNameView extends StatelessWidget {
   const EditNameView({super.key});
