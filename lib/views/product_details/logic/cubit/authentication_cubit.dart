@@ -126,7 +126,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   Future<void> getUserData() async {
     emit(GetUserDataLoading());
     try {
-      final data = await client
+      final List<Map<String,dynamic>> data = await client
           .from('users')
           .select()
           .eq("user_id", client.auth.currentUser!.id);
