@@ -23,7 +23,7 @@ class ApiServices {
     return await _dio.patch(path, data: data);
   }
 
-  Future<Response> deleteData(String path) async{
+  Future<Response> deleteData(String path) async {
     return await _dio.delete(path);
   }
 }

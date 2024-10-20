@@ -13,8 +13,7 @@ void main() async {
 
   await Supabase.initialize(
     url: 'https://itjstiahcigzhbrwggfz.supabase.co',
-    anonKey:
-        anonKey,
+    anonKey: anonKey,
   );
   Bloc.observer = MyObserver();
   runApp(const OurMarket());
@@ -36,7 +35,9 @@ class OurMarket extends StatelessWidget {
           scaffoldBackgroundColor: AppColors.kScaffoldColor,
           useMaterial3: true,
         ),
-        home: client.auth.currentUser != null ?  MainHomeView() : const LoginView(),
+        home: client.auth.currentUser != null
+            ? MainHomeView()
+            : const LoginView(),
       ),
     );
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -9,5 +8,3 @@ class AppColors {
   static const Color kBlackColor = Color(0xFF17162B);
   static const Color kGreyColor = Colors.grey;
 }
-
-

@@ -1,4 +1,3 @@
-
 class UserDataModel {
   String userId, name, email;
   UserDataModel({

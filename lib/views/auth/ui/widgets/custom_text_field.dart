@@ -7,7 +7,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.labelText,
     this.suffIcon,
     this.isSecured = false,
-    this.keyboardType,  this.controller,
+    this.keyboardType,
+    this.controller,
   });
   final String labelText;
   final Widget? suffIcon;

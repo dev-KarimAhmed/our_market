@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
 
@@ -26,18 +25,18 @@ class CustomSearchField extends StatelessWidget {
           ),
         ),
         border: OutlineInputBorder(
-          borderSide: const BorderSide(
-              color: AppColors.kBordersideColor, width: 2),
+          borderSide:
+              const BorderSide(color: AppColors.kBordersideColor, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-              color: AppColors.kBordersideColor, width: 2),
+          borderSide:
+              const BorderSide(color: AppColors.kBordersideColor, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-              color: AppColors.kBordersideColor, width: 2),
+          borderSide:
+              const BorderSide(color: AppColors.kBordersideColor, width: 2),
           borderRadius: BorderRadius.circular(8),
         ),
       ),

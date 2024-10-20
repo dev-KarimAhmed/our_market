@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MyObserver implements BlocObserver{
+class MyObserver implements BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     log(change.toString());

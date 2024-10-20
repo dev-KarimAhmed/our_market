@@ -50,5 +50,7 @@ final class UserDataAddedSuccess extends AuthenticationState {}
 final class UserDataAddedError extends AuthenticationState {}
 
 final class GetUserDataLoading extends AuthenticationState {}
+
 final class GetUserDataSuccess extends AuthenticationState {}
+
 final class GetUserDataError extends AuthenticationState {}

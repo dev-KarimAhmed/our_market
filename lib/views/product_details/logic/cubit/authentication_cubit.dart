@@ -76,8 +76,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       accessToken: accessToken,
     );
     await addUserData(name: googleUser!.displayName!, email: googleUser!.email);
-      await getUserData();
-       
+    await getUserData();
+
     emit(GoogleSignInSuccess());
     return response;
   }
@@ -126,7 +126,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   Future<void> getUserData() async {
     emit(GetUserDataLoading());
     try {
-      final List<Map<String,dynamic>> data = await client
+      final List<Map<String, dynamic>> data = await client
           .from('users')
           .select()
           .eq("user_id", client.auth.currentUser!.id);

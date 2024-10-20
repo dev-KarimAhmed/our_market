@@ -69,7 +69,7 @@ class _SignupViewState extends State<SignupView> {
                                 padding: const EdgeInsets.all(16.0),
                                 child: Column(
                                   children: [
-                                     CustomTextFormField(
+                                    CustomTextFormField(
                                       controller: _nameController,
                                       labelText: "Name",
                                       keyboardType: TextInputType.name,
@@ -77,7 +77,7 @@ class _SignupViewState extends State<SignupView> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                     CustomTextFormField(
+                                    CustomTextFormField(
                                       controller: _emailController,
                                       labelText: "Email",
                                       keyboardType: TextInputType.emailAddress,
