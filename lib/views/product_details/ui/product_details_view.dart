@@ -2,32 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:our_market/core/components/cache_image.dart';
 import 'package:our_market/core/functions/build_appbar.dart';
+import 'package:our_market/core/models/product_model/product_model.dart';
 import 'package:our_market/views/product_details/ui/widgets/comments_list.dart';
 
 import '../../auth/ui/widgets/custom_text_field.dart';
 
 class ProductDetailsView extends StatelessWidget {
-  const ProductDetailsView({super.key});
+  const ProductDetailsView({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildCustomAppBar(context, "Product Name"),
+      appBar: buildCustomAppBar(context, product.productName ?? "Product Name"),
       body: ListView(
         children: [
-          const CaheImage(
+           CaheImage(
             url:
-                "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900",
+               product.imageUrl ?? "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900",
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
             child: Column(
               children: [
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Product Name"),
-                    Text("123 LE"),
+                    Text(product.productName ?? "Product Name"),
+                    Text( product.price != null ? "${product.price} LE" : "... LE"),
                   ],
                 ),
                 const SizedBox(
@@ -48,7 +50,7 @@ class ProductDetailsView extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                const Text("Product Description"),
+                 Text(product.description ?? "Product Description"),
                 const SizedBox(
                   height: 20,
                 ),
