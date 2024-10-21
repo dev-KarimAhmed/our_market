@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
-import 'package:our_market/views/product_details/logic/models/user_model.dart';
+import 'package:our_market/views/auth/logic/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'authentication_state.dart';

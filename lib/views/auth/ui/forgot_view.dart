@@ -5,7 +5,7 @@ import 'package:our_market/core/components/custom_circle_pro_ind.dart';
 import 'package:our_market/core/functions/show_msg.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_elevated_btn.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_field.dart';
-import 'package:our_market/views/product_details/logic/cubit/authentication_cubit.dart';
+import 'package:our_market/views/auth/logic/cubit/authentication_cubit.dart';
 
 class ForgotView extends StatefulWidget {
   const ForgotView({super.key});

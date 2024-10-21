@@ -6,7 +6,7 @@ import 'package:our_market/views/auth/ui/widgets/custom_row_with_arrow.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_btn.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_field.dart';
 import 'package:our_market/views/nav_bar/ui/main_home_view.dart';
-import 'package:our_market/views/product_details/logic/cubit/authentication_cubit.dart';
+import 'package:our_market/views/auth/logic/cubit/authentication_cubit.dart';
 
 import '../../../core/functions/show_msg.dart';
 

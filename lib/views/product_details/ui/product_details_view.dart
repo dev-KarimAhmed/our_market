@@ -17,19 +17,21 @@ class ProductDetailsView extends StatelessWidget {
       appBar: buildCustomAppBar(context, product.productName ?? "Product Name"),
       body: ListView(
         children: [
-           CaheImage(
-            url:
-               product.imageUrl ?? "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900",
+          CaheImage(
+            url: product.imageUrl ??
+                "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900",
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
             child: Column(
               children: [
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(product.productName ?? "Product Name"),
-                    Text( product.price != null ? "${product.price} LE" : "... LE"),
+                    Text(product.price != null
+                        ? "${product.price} LE"
+                        : "... LE"),
                   ],
                 ),
                 const SizedBox(
@@ -50,7 +52,7 @@ class ProductDetailsView extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                 Text(product.description ?? "Product Description"),
+                Text(product.description ?? "Product Description"),
                 const SizedBox(
                   height: 20,
                 ),
