@@ -53,16 +53,16 @@ class ProductDetailsView extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                             Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
                                   children: [
                                     Text("${cubit.averageRate} "),
-                                    Icon(Icons.star, color: Colors.amber),
+                                    const Icon(Icons.star, color: Colors.amber),
                                   ],
                                 ),
-                                Icon(Icons.favorite, color: Colors.grey),
+                                const Icon(Icons.favorite, color: Colors.grey),
                               ],
                             ),
                             const SizedBox(
@@ -73,7 +73,7 @@ class ProductDetailsView extends StatelessWidget {
                               height: 20,
                             ),
                             RatingBar.builder(
-                              initialRating: 3,
+                              initialRating: cubit.userRate.toDouble(),
                               minRating: 1,
                               direction: Axis.horizontal,
                               allowHalfRating: false,
