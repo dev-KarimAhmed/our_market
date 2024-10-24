@@ -53,7 +53,9 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         averageRate += userRate.rate!; //15
       }
     }
-    averageRate = averageRate ~/ rates.length;
+    if (rates.isNotEmpty) {
+      averageRate = averageRate ~/ rates.length;
+    }
   }
 
   bool _isUserRateExist({required String productId}) {
@@ -81,6 +83,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         // post rate
         await _apiServices.postData(path, data);
       }
+      
       emit(AddOrUpdateRateSuccess());
     } catch (e) {
       log(e.toString());
