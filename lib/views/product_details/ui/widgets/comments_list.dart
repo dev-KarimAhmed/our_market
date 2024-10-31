@@ -27,9 +27,11 @@ class CommentsList extends StatelessWidget {
             return ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => const UserComment(),
+              itemBuilder: (context, index) =>  UserComment(
+                commentData: data?[index],
+              ),
               separatorBuilder: (context, index) => const Divider(),
-              itemCount: 10,
+              itemCount: data?.length ?? 0,
             );
           } else if (!snapshot.hasData) {
             return const Center(
@@ -46,17 +48,26 @@ class CommentsList extends StatelessWidget {
 
 class UserComment extends StatelessWidget {
   const UserComment({
-    super.key,
+    super.key, required this.commentData,
   });
-
+  final Map<String, dynamic>? commentData;
+    // {
+    //     "id": "c8c39960-4e79-496f-830c-d8712f48b8c3",
+    //     "created_at": "2024-10-31T21:54:50.564511+00:00",
+    //     "comment": "good product ui",
+    //     "for_user": "469a8270-61e0-4e09-9e89-970b45026cb6",
+    //     "for_product": "93523372-9b7f-46bd-9aa0-d775fdeb0f01",
+    //     "user_name": "Karim",
+    //     "replay": "This is replay"
+    // }
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return  Column(
       children: [
         Row(
           children: [
             Text(
-              "User Name",
+             commentData?["user_name"] ?? "User Name",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
@@ -64,25 +75,31 @@ class UserComment extends StatelessWidget {
         Row(
           children: [
             Text(
-              "Comment",
+              commentData?["comment"] ?? "Comment",
             ),
           ],
         ),
-        Row(
+     commentData?["replay"] != null ?   
+     Column(
+       children: [
+         Row(
+              children: [
+                Text(
+                  "Replay:-",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Row(
           children: [
             Text(
-              "Replay:-",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              commentData!["replay"],
             ),
           ],
         ),
-        Row(
-          children: [
-            Text(
-              "Replay....",
-            ),
-          ],
-        ),
+       ],
+     ) : Container(),
+        
       ],
     );
   }
