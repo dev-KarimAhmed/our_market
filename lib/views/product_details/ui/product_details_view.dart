@@ -6,37 +6,44 @@ import 'package:our_market/core/components/custom_circle_pro_ind.dart';
 import 'package:our_market/core/functions/build_appbar.dart';
 import 'package:our_market/core/functions/navigate_without_back.dart';
 import 'package:our_market/core/models/product_model/product_model.dart';
+import 'package:our_market/views/auth/logic/cubit/authentication_cubit.dart';
 import 'package:our_market/views/product_details/logic/cubit/product_details_cubit.dart';
 import 'package:our_market/views/product_details/ui/widgets/comments_list.dart';
 
 import '../../auth/ui/widgets/custom_text_field.dart';
 
-class ProductDetailsView extends StatelessWidget {
+class ProductDetailsView extends StatefulWidget {
   const ProductDetailsView({super.key, required this.product});
   final ProductModel product;
 
   @override
+  State<ProductDetailsView> createState() => _ProductDetailsViewState();
+}
+
+class _ProductDetailsViewState extends State<ProductDetailsView> {
+  final TextEditingController _commentController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ProductDetailsCubit()..getRates(productId: product.productId!),
+          ProductDetailsCubit()..getRates(productId: widget.product.productId!),
       child: BlocConsumer<ProductDetailsCubit, ProductDetailsState>(
         listener: (context, state) async {
           if (state is AddOrUpdateRateSuccess) {
-            navigateWithoutBack(context, this);
+            navigateWithoutBack(context, widget);
           }
         },
         builder: (context, state) {
           ProductDetailsCubit cubit = context.read<ProductDetailsCubit>();
           return Scaffold(
             appBar: buildCustomAppBar(
-                context, product.productName ?? "Product Name"),
-            body: state is GetRateLoading 
+                context, widget.product.productName ?? "Product Name"),
+            body: state is GetRateLoading || state is AddCommentLoading
                 ? const CustomCircleProgIndicator()
                 : ListView(
                     children: [
                       CaheImage(
-                        url: product.imageUrl ??
+                        url: widget.product.imageUrl ??
                             "https://img.freepik.com/premium-psd/kitchen-product-podium-display-background_1101917-13418.jpg?w=900",
                       ),
                       Padding(
@@ -47,9 +54,10 @@ class ProductDetailsView extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(product.productName ?? "Product Name"),
-                                Text(product.price != null
-                                    ? "${product.price} LE"
+                                Text(widget.product.productName ??
+                                    "Product Name"),
+                                Text(widget.product.price != null
+                                    ? "${widget.product.price} LE"
                                     : "... LE"),
                               ],
                             ),
@@ -71,7 +79,8 @@ class ProductDetailsView extends StatelessWidget {
                             const SizedBox(
                               height: 30,
                             ),
-                            Text(product.description ?? "Product Description"),
+                            Text(widget.product.description ??
+                                "Product Description"),
                             const SizedBox(
                               height: 20,
                             ),
@@ -89,11 +98,11 @@ class ProductDetailsView extends StatelessWidget {
                               ),
                               onRatingUpdate: (rating) {
                                 cubit.addOrUpdateUserRate(
-                                  productId: product.productId!,
+                                  productId: widget.product.productId!,
                                   data: {
                                     "rate": rating.toInt(),
                                     "for_user": cubit.userId,
-                                    "for_product": product.productId,
+                                    "for_product": widget.product.productId,
                                   },
                                 );
                               },
@@ -102,9 +111,24 @@ class ProductDetailsView extends StatelessWidget {
                               height: 40,
                             ),
                             CustomTextFormField(
+                              controller: _commentController,
                               labelText: "Type your feedback",
                               suffIcon: IconButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await cubit.addComment(
+                                    data: {
+                                      "comment": _commentController.text,
+                                      "for_user": cubit.userId,
+                                      "for_product": widget.product.productId,
+                                      "user_name": context
+                                              .read<AuthenticationCubit>()
+                                              .userDataModel
+                                              ?.name ??
+                                          "User Name"
+                                    },
+                                  );
+                                  _commentController.clear();
+                                },
                                 icon: const Icon(Icons.send),
                               ),
                             ),
@@ -134,5 +158,11 @@ class ProductDetailsView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
   }
 }
