@@ -5,17 +5,37 @@ import 'package:our_market/core/functions/navigate_to.dart';
 import 'package:our_market/views/home/ui/search_view.dart';
 import 'package:our_market/views/home/ui/widgets/categories_list.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView(
         children: [
+          const SizedBox(
+            height: 15,
+          ),
           CustomSearchField(
-            onPressed: () => navigateTo(context, const SearchView()),
+            controller: _searchController,
+            onPressed: () {
+              if (_searchController.text.isNotEmpty) {
+                navigateTo(
+                  context,
+                  SearchView(
+                    query: _searchController.text,
+                  ),
+                );
+                _searchController.clear();
+              }
+            },
           ),
           const SizedBox(
             height: 20,
@@ -50,5 +70,11 @@ class HomeView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 }
