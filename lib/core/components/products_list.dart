@@ -29,6 +29,7 @@ class ProductsList extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
+          HomeCubit homeCubit = context.read<HomeCubit>();
           List<ProductModel> products = query != null
               ? context.read<HomeCubit>().searchResults
               :
@@ -46,6 +47,9 @@ class ProductsList extends StatelessWidget {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     return ProductCard(
+                      onTap: () {
+                        homeCubit.addToFavorite(products[index].productId!);
+                      },
                       product: products[index],
                     );
                   });
