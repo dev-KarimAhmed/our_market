@@ -11,8 +11,11 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     required this.product,
     super.key,
+    this.onTap, required this.isFavorite,
   });
   final ProductModel product;
+  final Function()? onTap;
+  final bool isFavorite;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -79,10 +82,10 @@ class ProductCard extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
+                              onPressed: onTap,
+                              icon:  Icon(
                                 Icons.favorite,
-                                color: AppColors.kGreyColor,
+                                color: isFavorite ? AppColors.kPrimaryColor :  AppColors.kGreyColor,
                               ))
                         ]),
                     Row(

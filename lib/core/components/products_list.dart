@@ -29,16 +29,20 @@ class ProductsList extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
+          HomeCubit homeCubit = context.read<HomeCubit>();
+
           List<ProductModel> products = query != null
-              ? context.read<HomeCubit>().searchResults
+              ? homeCubit.searchResults
               :
               // query == null
               category != null
-                  ? context.read<HomeCubit>().categoryProducts
+                  ? homeCubit.categoryProducts
                   :
                   // query == null & category == null
-                  context.read<HomeCubit>().products;
-          return state is GetDataLoading
+                  homeCubit.products;
+          return state is GetDataLoading ||
+                  state is AddToFavoriteLoading ||
+                  state is RemoveFromFavoriteLoading
               ? const CustomCircleProgIndicator()
               : ListView.builder(
                   shrinkWrap: shrinkWrap ?? true,
@@ -46,7 +50,19 @@ class ProductsList extends StatelessWidget {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     return ProductCard(
+                      isFavorite:
+                          homeCubit.checkIsFavorite(products[index].productId!),
                       product: products[index],
+                      onTap: () {
+                        bool isFavorite = homeCubit
+                            .checkIsFavorite(products[index].productId!);
+
+                        isFavorite
+                            ? homeCubit
+                                .removeFromFavorite(products[index].productId!)
+                            : homeCubit
+                                .addToFavorite(products[index].productId!);
+                      },
                     );
                   });
         },
