@@ -25,9 +25,7 @@ class ProductsList extends StatelessWidget {
       create: (context) =>
           HomeCubit()..getProducts(query: query, category: category),
       child: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           HomeCubit homeCubit = context.read<HomeCubit>();
           List<ProductModel> products = query != null
@@ -46,7 +44,12 @@ class ProductsList extends StatelessWidget {
                   physics: physics ?? const NeverScrollableScrollPhysics(),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
+                    bool isFavorite = homeCubit.checkIsFavorite(
+                      products[index].productId!,
+                    );
                     return ProductCard(
+                      isFavorite:
+                          homeCubit.checkIsFavorite(products[index].productId!),
                       onTap: () {
                         homeCubit.addToFavorite(products[index].productId!);
                       },
