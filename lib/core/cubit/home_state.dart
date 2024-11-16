@@ -14,4 +14,7 @@ final class GetDataError extends HomeState {}
 final class AddToFavoriteLoading extends HomeState {}
 final class AddToFavoriteSuccess extends HomeState {}
 final class AddToFavoriteError extends HomeState {}
+final class RemoveFromFavoriteLoading extends HomeState {}
+final class RemoveFromFavoriteSuccess extends HomeState {}
+final class RemoveFromFavoriteError extends HomeState {}
 

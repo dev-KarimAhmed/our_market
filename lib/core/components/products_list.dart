@@ -44,14 +44,13 @@ class ProductsList extends StatelessWidget {
                   physics: physics ?? const NeverScrollableScrollPhysics(),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
-                    bool isFavorite = homeCubit.checkIsFavorite(
-                      products[index].productId!,
-                    );
                     return ProductCard(
                       isFavorite:
                           homeCubit.checkIsFavorite(products[index].productId!),
                       onTap: () {
-                        homeCubit.addToFavorite(products[index].productId!);
+                        bool isFavorite = homeCubit
+                            .checkIsFavorite(products[index].productId!);
+                      isFavorite ? homeCubit.removeFavorite(products[index].productId!) : homeCubit.addToFavorite(products[index].productId!);
                       },
                       product: products[index],
                     );
