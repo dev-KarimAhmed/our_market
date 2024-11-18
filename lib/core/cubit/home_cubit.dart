@@ -112,7 +112,6 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> favoriteProductsList = [];
   // get favorite products
   void getFavoriteProducts() {
-    favoriteProductsList = [];
     for (var product in products) {
       if (product.favoriteProducts != null &&
           product.favoriteProducts!.isNotEmpty) {

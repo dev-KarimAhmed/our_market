@@ -140,4 +140,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(GetUserDataError());
     }
   }
+
+  // update user Name
+  Future<void> updateUserData({required String name}) async {
+    emit(UpdateUserDataLoading());
+    try {
+      await client.from('users').update({
+        "name": name,
+      }).eq("user_id", client.auth.currentUser!.id);
+      emit(UpdateUserDataSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(UpdateUserDataError());
+    }
+  }
 }
