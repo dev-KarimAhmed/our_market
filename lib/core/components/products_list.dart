@@ -12,12 +12,14 @@ class ProductsList extends StatelessWidget {
     this.physics,
     this.query,
     this.category,
+    this.isFavoriteView = false,
   });
 
   final bool? shrinkWrap;
   final ScrollPhysics? physics;
   final String? query;
   final String? category;
+  final bool isFavoriteView;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,7 @@ class ProductsList extends StatelessWidget {
       create: (context) =>
           HomeCubit()..getProducts(query: query, category: category),
       child: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           HomeCubit homeCubit = context.read<HomeCubit>();
 
@@ -39,7 +39,9 @@ class ProductsList extends StatelessWidget {
                   ? homeCubit.categoryProducts
                   :
                   // query == null & category == null
-                  homeCubit.products;
+                  isFavoriteView
+                      ? homeCubit.favoriteProductsList
+                      : homeCubit.products;
           return state is GetDataLoading ||
                   state is AddToFavoriteLoading ||
                   state is RemoveFromFavoriteLoading
