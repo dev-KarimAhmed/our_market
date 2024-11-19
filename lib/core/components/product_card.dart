@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
 import 'package:our_market/core/components/cache_image.dart';
 import 'package:our_market/core/functions/navigate_to.dart';
 import 'package:our_market/core/models/product_model/product_model.dart';
 import 'package:our_market/views/product_details/ui/product_details_view.dart';
+import 'package:pay_with_paymob/pay_with_paymob.dart';
 
 import '../../views/auth/ui/widgets/custom_elevated_btn.dart';
 
@@ -11,7 +14,8 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     required this.product,
     super.key,
-    this.onTap, required this.isFavorite,
+    this.onTap,
+    required this.isFavorite,
   });
   final ProductModel product;
   final Function()? onTap;
@@ -83,9 +87,11 @@ class ProductCard extends StatelessWidget {
                           ),
                           IconButton(
                               onPressed: onTap,
-                              icon:  Icon(
+                              icon: Icon(
                                 Icons.favorite,
-                                color: isFavorite ? AppColors.kPrimaryColor :  AppColors.kGreyColor,
+                                color: isFavorite
+                                    ? AppColors.kPrimaryColor
+                                    : AppColors.kGreyColor,
                               ))
                         ]),
                     Row(
@@ -112,7 +118,22 @@ class ProductCard extends StatelessWidget {
                         ),
                         CustomEBtn(
                           text: "Buy Now",
-                          onTap: () {},
+                          onTap: () {
+                            if (product.price != null) {
+                              navigateTo(
+                                  context,
+                                  PaymentView(
+                                    onPaymentSuccess: () {
+                                      log("payment success");
+                                    },
+                                    onPaymentError: () {
+                                      log("payment error");
+                                    },
+                                    price: double.parse(product
+                                        .price!), // (Required) Total Price e.g. 100 => 100 LE
+                                  ));
+                            }
+                          },
                         ),
                       ],
                     )

@@ -16,6 +16,7 @@ void main() async {
     anonKey: anonKey,
   );
   Bloc.observer = MyObserver();
+  
   runApp(const OurMarket());
 }
 
