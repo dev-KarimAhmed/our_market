@@ -23,6 +23,7 @@ class HomeCubit extends Cubit<HomeState> {
     products = [];
     searchResults = [];
     categoryProducts = [];
+    userProducts = [];
 
     emit(GetDataLoading());
     try {
@@ -34,6 +35,7 @@ class HomeCubit extends Cubit<HomeState> {
       search(query);
       getProductsByCategory(category);
       getFavoriteProducts();
+      getUserProducts();
       emit(GetDataSuccess());
     } catch (e) {
       log(e.toString());
@@ -126,4 +128,41 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
+
+  // Buy product
+  Future<void> buyProduct(String productId) async {
+    emit(BuyProductLoading());
+    try {
+      await _apiServices.postData("purchase_table", {
+        "for_user": userId,
+        "for_product": productId,
+        "is_bought": true,
+      });
+      await getProducts();
+      emit(BuyProductSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(BuyProductError());
+    }
+  }
+
+   List<ProductModel> userProducts = [];
+  // get favorite products
+  void getUserProducts() {
+    for (var product in products) {
+      if (product.purchaseTable != null &&
+          product.purchaseTable!.isNotEmpty) {
+        for (var userProuct in product.purchaseTable!) {
+          if (userProuct.forUser == userId) {
+            userProducts.add(product);
+           
+          }
+        }
+      }
+    }
+  }
+   bool checkIsBought(String productId) {
+    return userProducts.any((element) => element.productId == productId);
+  }
+
 }

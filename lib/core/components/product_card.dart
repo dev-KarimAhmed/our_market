@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:our_market/core/app_colors.dart';
@@ -6,7 +5,6 @@ import 'package:our_market/core/components/cache_image.dart';
 import 'package:our_market/core/functions/navigate_to.dart';
 import 'package:our_market/core/models/product_model/product_model.dart';
 import 'package:our_market/views/product_details/ui/product_details_view.dart';
-import 'package:pay_with_paymob/pay_with_paymob.dart';
 
 import '../../views/auth/ui/widgets/custom_elevated_btn.dart';
 
@@ -15,11 +13,13 @@ class ProductCard extends StatelessWidget {
     required this.product,
     super.key,
     this.onTap,
-    required this.isFavorite,
+    required this.isFavorite, this.buyProduct, required this.isBught,
   });
   final ProductModel product;
   final Function()? onTap;
+  final Function()? buyProduct;
   final bool isFavorite;
+  final bool isBught;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -117,23 +117,8 @@ class ProductCard extends StatelessWidget {
                           ],
                         ),
                         CustomEBtn(
-                          text: "Buy Now",
-                          onTap: () {
-                            if (product.price != null) {
-                              navigateTo(
-                                  context,
-                                  PaymentView(
-                                    onPaymentSuccess: () {
-                                      log("payment success");
-                                    },
-                                    onPaymentError: () {
-                                      log("payment error");
-                                    },
-                                    price: double.parse(product
-                                        .price!), // (Required) Total Price e.g. 100 => 100 LE
-                                  ));
-                            }
-                          },
+                          text: isBught ? "Buy Again" : "Buy Now",
+                          onTap: buyProduct,
                         ),
                       ],
                     )
