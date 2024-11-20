@@ -11,7 +11,7 @@ class ProductModel {
   String? description;
   String? category;
   String? imageUrl;
-  List<FavoriteProduct>? favoriteProducts;
+  List<FavoriteProduct>? favoriteProducts; 
   List<PurchaseTable>? purchaseTable;
 
   ProductModel({
