@@ -18,3 +18,7 @@ final class RemoveFromFavoriteLoading extends HomeState {}
 final class RemoveFromFavoriteSuccess extends HomeState {}
 final class RemoveFromFavoriteError extends HomeState {}
 
+final class BuyProductLoading extends HomeState {}
+final class BuyProductDone extends HomeState {}
+final class BuyProductError extends HomeState {}
+

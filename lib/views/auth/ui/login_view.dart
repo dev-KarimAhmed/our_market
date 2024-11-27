@@ -5,6 +5,7 @@ import 'package:our_market/core/components/custom_circle_pro_ind.dart';
 import 'package:our_market/core/functions/navigate_to.dart';
 import 'package:our_market/core/functions/navigate_without_back.dart';
 import 'package:our_market/core/functions/show_msg.dart';
+import 'package:our_market/views/auth/logic/models/user_model.dart';
 import 'package:our_market/views/auth/ui/forgot_view.dart';
 import 'package:our_market/views/auth/ui/signup_view.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_row_with_arrow.dart';
@@ -30,7 +31,8 @@ class _LoginViewState extends State<LoginView> {
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is LoginSuccess || state is GoogleSignInSuccess) {
-          navigateWithoutBack(context, MainHomeView());
+          UserDataModel userDataModel = context.read<AuthenticationCubit>().userDataModel!;
+          navigateWithoutBack(context, MainHomeView(userDataModel: userDataModel,));
         }
         if (state is LoginError) {
           showMsg(context, state.message);

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/app_colors.dart';
 import 'package:our_market/core/components/custom_circle_pro_ind.dart';
+import 'package:our_market/core/functions/navigate_without_back.dart';
+import 'package:our_market/views/auth/logic/models/user_model.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_row_with_arrow.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_btn.dart';
 import 'package:our_market/views/auth/ui/widgets/custom_text_field.dart';
@@ -27,8 +29,8 @@ class _SignupViewState extends State<SignupView> {
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is SignUpSuccess || state is GoogleSignInSuccess) {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => MainHomeView()));
+          UserDataModel userDataModel = context.read<AuthenticationCubit>().userDataModel!;
+          navigateWithoutBack(context, MainHomeView(userDataModel: userDataModel,));
         }
         if (state is SignUpError) {
           showMsg(context, state.message);
