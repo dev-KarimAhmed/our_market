@@ -14,6 +14,7 @@ class ProductsList extends StatelessWidget {
     this.query,
     this.category,
     this.isFavoriteView = false,
+    this.isMyOrdersView = false,
   });
 
   final bool? shrinkWrap;
@@ -21,6 +22,7 @@ class ProductsList extends StatelessWidget {
   final String? query;
   final String? category;
   final bool isFavoriteView;
+  final bool isMyOrdersView;
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +45,11 @@ class ProductsList extends StatelessWidget {
                   ? context.read<HomeCubit>().categoryProducts
                   : isFavoriteView
                       ? homeCubit.favoriteProductList
-                      :
-                      // query == null & category == null
-                      context.read<HomeCubit>().products;
+                      : isMyOrdersView
+                          ? homeCubit.userOrders
+                          :
+                          // query == null & category == null
+                          context.read<HomeCubit>().products;
           return state is GetDataLoading
               ? const CustomCircleProgIndicator()
               : ListView.builder(
@@ -55,8 +59,8 @@ class ProductsList extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ProductCard(
                       onPaymentSuccess: () {
-                        homeCubit.buyProduct(productId: products[index].productId!);
-                        
+                        homeCubit.buyProduct(
+                            productId: products[index].productId!);
                       },
                       isFavorite:
                           homeCubit.checkIsFavorite(products[index].productId!),

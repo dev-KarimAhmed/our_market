@@ -12,6 +12,7 @@ class MyOrdersViwe extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(8.0),
         child: ProductsList(
+          isMyOrdersView: true,
           shrinkWrap: false,
           physics: BouncingScrollPhysics(),
         ),
