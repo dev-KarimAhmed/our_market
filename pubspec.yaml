@@ -37,12 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.6
   google_nav_bar: ^5.0.6
   flutter_bloc: ^8.1.6
-  cached_network_image: ^3.4.1
+  cached_network_image: ^3.3.1
   flutter_rating_bar: ^4.0.1
   supabase_flutter: ^2.8.0
   google_sign_in: ^6.2.1
   dio: ^5.7.0
   pay_with_paymob: ^1.4.0
+  flutter_automation: ^2.0.0
 
 dev_dependencies:
   flutter_test:
