@@ -42,7 +42,7 @@ dependencies:
   supabase_flutter: ^2.8.0
   google_sign_in: ^6.2.1
   dio: ^5.7.0
-  pay_with_paymob: ^1.3.1
+  pay_with_paymob: ^1.4.0
 
 dev_dependencies:
   flutter_test:
