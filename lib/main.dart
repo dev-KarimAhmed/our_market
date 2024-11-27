@@ -27,7 +27,7 @@ class OurMarket extends StatelessWidget {
   Widget build(BuildContext context) {
     SupabaseClient client = Supabase.instance.client;
     return BlocProvider(
-      create: (context) => AuthenticationCubit(),
+      create: (context) => AuthenticationCubit()..getUserData(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Our Market',
@@ -36,7 +36,9 @@ class OurMarket extends StatelessWidget {
           useMaterial3: true,
         ),
         home: client.auth.currentUser != null
-            ? MainHomeView()
+            ? MainHomeView(
+              userDataModel: context.read<AuthenticationCubit>().userDataModel!,
+            )
             : const LoginView(),
       ),
     );

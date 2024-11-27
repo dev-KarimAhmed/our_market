@@ -4,12 +4,14 @@ import 'package:our_market/core/components/custom_search_field.dart';
 import 'package:our_market/core/components/products_list.dart';
 import 'package:our_market/core/functions/navigate_to.dart';
 import 'package:our_market/core/sensitive_data.dart';
+import 'package:our_market/views/auth/logic/models/user_model.dart';
 import 'package:our_market/views/home/ui/search_view.dart';
 import 'package:our_market/views/home/ui/widgets/categories_list.dart';
 import 'package:pay_with_paymob/pay_with_paymob.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  const HomeView({super.key, required this.userDataModel});
+  final UserDataModel userDataModel;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -31,22 +33,21 @@ class _HomeViewState extends State<HomeView> {
           integrationMobileWalletId, // Required: Found under Developers -> Payment Integrations -> Mobile Wallet ID
 
       // // Optional User Data
-      // userData: UserData(
-      //   email: "User Email", // Optional: Defaults to 'NA'
-      //   phone: "User Phone", // Optional: Defaults to 'NA'
-      //   name: "User First Name", // Optional: Defaults to 'NA'
-      //   lastName: "User Last Name", // Optional: Defaults to 'NA'
-      // ),
+      userData: UserData(
+        email:widget.userDataModel.email, // Optional: Defaults to 'NA'
+        // phone: "User Phone", // Optional: Defaults to 'NA'
+        name: widget.userDataModel.name, // Optional: Defaults to 'NA'
+        // lastName: "User Last Name", // Optional: Defaults to 'NA'
+      ),
 
       // // Optional Style Customizations
       style: Style(
         primaryColor: AppColors.kPrimaryColor, // Default: Colors.blue
         appBarBackgroundColor: AppColors.kPrimaryColor, // Default: Colors.blue
-        buttonStyle:
-            ElevatedButton.styleFrom(
-              backgroundColor: AppColors.kPrimaryColor,
-              foregroundColor: Colors.white,
-            ), // Default: ElevatedButton.styleFrom()
+        buttonStyle: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.kPrimaryColor,
+          foregroundColor: Colors.white,
+        ), // Default: ElevatedButton.styleFrom()
         circleProgressColor: AppColors.kPrimaryColor, // Default: Colors.blue
         unselectedColor: Colors.grey, // Default: Colors.grey
       ),

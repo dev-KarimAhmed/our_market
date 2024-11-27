@@ -2,20 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:our_market/core/app_colors.dart';
+import 'package:our_market/views/auth/logic/models/user_model.dart';
 import 'package:our_market/views/favorite/ui/favorite_view.dart';
 import 'package:our_market/views/home/ui/home_view.dart';
 import 'package:our_market/views/nav_bar/logic/cubit/nav_bar_cubit.dart';
 import 'package:our_market/views/profile/ui/profile_view.dart';
 import 'package:our_market/views/store/ui/store_view.dart';
 
-class MainHomeView extends StatelessWidget {
-  MainHomeView({super.key});
-  final List<Widget> views = [
-    const HomeView(),
+class MainHomeView extends StatefulWidget {
+  MainHomeView({super.key, required this.userDataModel});
+  final UserDataModel userDataModel;
+
+  @override
+  State<MainHomeView> createState() => _MainHomeViewState();
+}
+
+class _MainHomeViewState extends State<MainHomeView> {
+late List<Widget> views;
+  @override
+  void initState() {
+     views = [
+     HomeView(userDataModel: widget.userDataModel,),
     const StoreView(),
     const FavoriteView(),
     const ProfileView(),
   ];
+
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
